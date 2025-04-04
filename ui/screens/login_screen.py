@@ -9,6 +9,7 @@ from typing import *
 
 @singleton
 class LoginScreen(QWidget):
+    LOGIN_VALID = Signal()  
 
     def __init__(self):
         super().__init__()
@@ -26,7 +27,6 @@ class LoginScreen(QWidget):
         self.emailField.setStyleSheet(css.input_line_style())
         self.emailField.setPlaceholderText('Email')
         self.loginContainerLayout.addWidget(self.emailField)
-
         
         self.passwordField = QLineEdit()
         self.passwordField.setStyleSheet(css.input_line_style())
@@ -38,4 +38,10 @@ class LoginScreen(QWidget):
         self.submitButton.setStyleSheet(css.simple_button())
         self.submitButton.setAttribute(Qt.WA_Hover, True)
         self.submitButton.setFixedSize(QSize(120, 40))
+        self.submitButton.clicked.connect(lambda: self.validate_credentials())
         self.loginContainerLayout.addWidget(self.submitButton, alignment=Qt.AlignmentFlag.AlignHCenter)
+
+    
+    def validate_credentials(self):
+        if self.emailField.text() == 'teste' and self.passwordField.text() == 'teste':
+            self.LOGIN_VALID.emit()
