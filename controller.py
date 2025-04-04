@@ -15,9 +15,10 @@ class ScreenController:
         self.login_screen.LOGIN_VALID.connect(self.switchScreen)
         self.stack.addWidget(self.login_screen)
 
-
         self.home_screen = HomeScreen()
         self.stack.addWidget(self.home_screen)
+        
+        self.stack.setCurrentWidget(self.home_screen)
     
 
     def getStack(self): 
